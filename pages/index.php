@@ -123,9 +123,6 @@
                                         <i class="fa fa-fw fa-user"></i> Utilisateur 
                                     </a>
                                 </div>
-                                <div class="text-right">
-                                    <a href="#">View All Activity <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
                             </div>
                         </div>
                     </div>
