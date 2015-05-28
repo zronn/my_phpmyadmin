@@ -70,7 +70,7 @@
                 <!-- /.row -->
 
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <h2>Affichage de la table <?php echo $_GET['tb']; ?></h2>
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">

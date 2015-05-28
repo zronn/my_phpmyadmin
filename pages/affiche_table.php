@@ -59,7 +59,7 @@
                         </h1>
                         <ol class="breadcrumb">
                             <li>
-                                <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+                                <i class="fa fa-dashboard"></i>  <a href="index.html">Accueil</a>
                             </li>
                             <li class="active">
                                 <i class="fa fa-table"></i> Tables
@@ -70,7 +70,7 @@
                 <!-- /.row -->
 
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <h2>Bordered Table</h2>
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
