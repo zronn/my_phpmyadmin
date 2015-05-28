@@ -2,6 +2,7 @@
   session_start();
   require_once '../check_session/connect_mysql.php';
   require_once '../check_session/needAuth.php';
+  mysqli_select_db($connect, $_GET['db']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,18 +19,15 @@
 <body>
   <a href="deconnexion.php">Se deconnecter</a><br>
   <?php
-    if (isset($connect))
+    $query = "show tables";
+    $result = mysqli_query($connect, $query);
+    if (!$result)
     {
-      $query = "show databases";
-      $result = mysqli_query($connect, $query);
-      if (!$result)
-      {
-        echo "ERROR";
-      }
-      while ($data = mysqli_fetch_row($result))
-      {
-        echo "<a href='affiche_database.php?db=" . $data[0] . "'>" . $data[0] . "<br>";
-      }  
+      echo "EMPTY";
+    }
+    while ($data = mysqli_fetch_row($result))
+    {
+      echo $data[0] . "<br>";
     }
   ?>
 

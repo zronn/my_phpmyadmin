@@ -22,7 +22,7 @@
               <img src="img/logo_left.png" class="img-responsive" alt="" />
               <input type="login" name="user" placeholder="Votre login" required class="form-control input-lg" />
               
-              <input type="password" class="form-control input-lg" id="password" name="password" placeholder="Votre mot de passe" required="" />
+              <input type="password" class="form-control input-lg" id="password" name="password" placeholder="Votre mot de passe" />
               
               
               <div class="pwstrength_viewport_progress"></div>
