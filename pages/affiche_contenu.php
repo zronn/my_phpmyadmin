@@ -71,37 +71,57 @@
 
                 <div class="row">
                     <div class="col-lg-6">
-                        <h2>Bordered Table</h2>
+                        <h2>Affichage de la table <?php echo $_GET['tb']; ?></h2>
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
+                                <?php
+                                    $tb = $_GET['tb'];
+                                    $query = "SELECT * FROM $tb";
+                                    $result = mysqli_query($connect, $query);
+                                    if (!$result) {
+                                       echo "ERROR";
+                                       exit;
+                                    }
+                                    $result_table = mysqli_query($connect, $query);
+                                    $i = 0;
+                                    while ($data = mysqli_fetch_array($result_table))
+                                       $i++;
+                                    if ($i != 0)
+                                    {
+                                        $tab_title = array_keys(mysqli_fetch_array(mysqli_query($connect, $query)));
+                                ?>
                                 <thead>
-                                    <tr>
-                                        <th>Tables</th>
-                                        <th>Actions</th>
+                                    <tr  style="text-align:center;">
+                                        <?php 
+                                            for ($j = 1; isset($tab_title[$j]); $j+=2)
+                                            {
+                                                echo '<th>'.$tab_title[$j].'</th>';
+                                            }
+                                        ?>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
-                                        $db = $_GET['db'];
-                                        if (!empty($connect))
+                                <?php 
+                                    while ($row = mysqli_fetch_array($result)) {
+                                        echo '<tr>';
+                                        for ($j = 1; isset($tab_title[$j]); $j+=2)
                                         {
-                                          $query = "show tables";
-                                          $result = mysqli_query($connect, $query);
-                                          if (!$result)
-                                          {
-                                            echo "ERROR";
-                                          }
-                                          while ($data = mysqli_fetch_array($result))
-                                          {
-                                            echo "<tr>";
-                                            echo "<td><a href='affiche_contenu.php?db=" . $db . "&tb=" . $data[0] . "'>" . $data[0] ."</a></td>";
-                                            echo "<td>Afficher | Modifier | Supprimer</td>";
-                                            echo "</tr>";
-                                          }  
+                                            echo '<td>'.$row[$tab_title[$j]].'</td>';
                                         }
-                                    ?>
+                                    }
+                                    mysqli_free_result($result);
+                                ?>
                                 </tbody>
                             </table>
+                            <?php
+                                }
+                                else
+                                {
+                            ?>
+                                   <span style="font-style:italic; color:green;"> MySQL a retourné un résultat vide (aucune ligne). </span><br>
+                            <?php
+                                }
+                            ?>
                         </div>
                     </div>
                 </div>
