@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">My_PhpMyAdmin</a>
+        <a class="navbar-brand" href="index.php">My_PhpMyAdmin</a>
     </div>
     <!-- Top Menu Items -->
     <ul class="nav navbar-right top-nav">
@@ -31,7 +31,7 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
             <li class="active">
-                <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Accueil</a>
+                <a href="index.php"><i class="fa fa-fw fa-home"></i> Accueil</a>
             </li>
             <li>
                 <a href="export.php"><i class="fa fa-fw fa-send"></i> Exporter</a>
@@ -54,7 +54,7 @@
                           while ($data = mysqli_fetch_row($result))
                           {
                             echo "<li>";
-                            echo "<a href='affiche_table.php?db=" . $data[0] . "'>" . $data[0] ."</a>";
+                            echo "<a href='affiche_table.php?db=" . $data[0] . "'><i class='fa fa-fw fa-tasks'></i> " . $data[0] ."</a>";
                             echo "</li>";
                           }  
                         }
