@@ -15,6 +15,7 @@ if ((isset($_POST['query'])) && (!empty($_POST['query'])))
 	if (!$query)
 	{
 		$error = mysqli_error($connect);
+		$reponse = array('result' => "SQL error : $error");
 	}
 	else
 		$reponse = array('result' => "Requette Sql Ok -> Traitement en $time");
