@@ -5,7 +5,7 @@
   mysqli_select_db($connect, $_GET['db']);
 
   $tb = $_GET['tb'];
-  $query = "DROP TABLE $tb";
+  $query = "DELETE FROM $tb";
   $result = mysqli_query($connect, $query);
   if (!$result)
   {
@@ -15,7 +15,6 @@
   else
   {
   	header("Location: affiche_table.php?db=" . $_GET['db']);
-  	exit();
+    exit();
   }
-
 ?>

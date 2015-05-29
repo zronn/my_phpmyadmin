@@ -82,7 +82,7 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2>Bordered Table</h2>
+                        <h2>Tables de la base de données <?php echo $db;?></h2>
                         <?php
                             if (isset($_GET['error']))
                             {
@@ -112,7 +112,7 @@
                                           {
                                             echo "<tr>";
                                             echo "<td><a href='affiche_contenu.php?db=" . $db . "&tb=" . $data[0] . "'>" . $data[0] ."</a></td>";
-                                            echo "<td><a href='affiche_contenu.php?db=" . $db . "&tb=" . $data[0] . "'><i class='fa fa-fw fa-file'></i>Afficher</a><a href='affiche_contenu.php?db=" . $db . "&tb=" . $data[0] . "'><i class='fa fa-fw fa-pencil'></i>Insérer</a><a href='delete_table.php?db=" . $db . "&tb=" . $data[0] . "'><i class='fa fa-fw fa-trash-o'></i>Supprimer</a></td>";
+                                            echo "<td><a href='affiche_contenu.php?db=" . $db . "&tb=" . $data[0] . "'><i class='fa fa-fw fa-file'></i>Afficher</a><a href='affiche_contenu.php?db=" . $db . "&tb=" . $data[0] . "'><i class='fa fa-fw fa-pencil'></i>Insérer</a><a href='clean_table.php?db=" . $db . "&tb=" . $data[0] . "'><i class='fa fa-fw fa-trash-o'></i>Vider</a><a href='delete_table.php?db=" . $db . "&tb=" . $data[0] . "'><i class='fa fa-fw fa-times-circle'></i>Supprimer</a></td>";
                                             echo "</tr>";
                                           }  
                                         }

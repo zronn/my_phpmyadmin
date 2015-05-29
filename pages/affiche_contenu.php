@@ -68,7 +68,13 @@
                                 <i class="fa fa-dashboard"></i>  <a href="index.php"> Accueil</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Tables
+                                <i class="fa fa-table"></i>
+                                <?php
+                                    echo "<a href='affiche_table.php?db=" . $_GET['db'] . "'> Table</a>";
+                                ?>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-file"></i> Affichage
                             </li>
                             <?php echo "<a href=\"sql.php?db=$db\">"?>
                             <button class="btn btn-info btn-xs pull-right">
