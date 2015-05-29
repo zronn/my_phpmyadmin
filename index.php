@@ -19,7 +19,7 @@
         <div class="col-md-4">
           <section class="login-form">
             <form action="check_session/auth.php" method="POST" accept-charset="UTF-8" enctype="multipart/form-data" role="login">
-              <img src="img/logo_left.png" class="img-responsive" alt="" />
+              <img src="img/logo_php.png" class="img-responsive" alt="" />
               <input type="login" name="user" placeholder="Votre login" required class="form-control input-lg" />
               
               <input type="password" class="form-control input-lg" id="password" name="password" placeholder="Votre mot de passe" />
