@@ -2,7 +2,11 @@
   session_start();
   require_once '../check_session/connect_mysql.php';
   require_once '../check_session/needAuth.php';
-  mysqli_select_db($connect, $_GET['db']);
+    if (isset($_GET['db']))
+    {
+        $db = $_GET['db'];
+        mysqli_select_db($connect, $_GET['db']);
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,6 +70,11 @@
                             <li class="active">
                                 <i class="fa fa-table"></i> Tables
                             </li>
+                            <?php echo "<a href=\"sql.php?db=$db\">"?>
+                            <button class="btn btn-info btn-xs pull-right">
+                                <i class="fa fa-code"></i> SQL
+                            </button>
+                            <?php echo "</a>"?>
                         </ol>
                     </div>
                 </div>

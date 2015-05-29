@@ -2,7 +2,11 @@
   session_start();
   require_once '../check_session/connect_mysql.php';
   require_once '../check_session/needAuth.php';
-  mysqli_select_db($connect, $_GET['db']);
+  if (isset($_GET['db']))
+  {
+    $db = $_GET['db'];
+    mysqli_select_db($connect, $_GET['db']);
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,6 +32,8 @@
 
     <!-- Custom Fonts -->
     <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -64,6 +70,11 @@
                             <li class="active">
                                 <i class="fa fa-table"></i> Tables
                             </li>
+                            <?php echo "<a href=\"sql.php?db=$db\">"?>
+                            <button class="btn btn-info btn-xs pull-right">
+                                <i class="fa fa-code"></i> SQL
+                            </button>
+                            <?php echo "</a>"?>
                         </ol>
                     </div>
                 </div>
@@ -73,7 +84,7 @@
                     <div class="col-lg-12">
                         <h2>Bordered Table</h2>
                         <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
+                            <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
                                         <th>Tables</th>
@@ -95,7 +106,7 @@
                                           {
                                             echo "<tr>";
                                             echo "<td><a href='affiche_contenu.php?db=" . $db . "&tb=" . $data[0] . "'>" . $data[0] ."</a></td>";
-                                            echo "<td>Afficher | Modifier | Supprimer</td>";
+                                            echo "<td><a href='affiche_contenu.php?db=" . $db . "&tb=" . $data[0] . "'>Afficher</a> | Modifier | Supprimer</td>";
                                             echo "</tr>";
                                           }  
                                         }
@@ -120,6 +131,19 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+
+    <!-- Affichage tableau + scroling + search -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#example').dataTable();
+        } );
+    </script>
 
 </body>
 
