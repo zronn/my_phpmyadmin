@@ -65,7 +65,7 @@
                         </h1>
                         <ol class="breadcrumb">
                             <li>
-                                <i class="fa fa-dashboard"></i>  <a href="index.html">Accueil</a>
+                                <i class="fa fa-dashboard"></i>  <a href="index.php">Accueil</a>
                             </li>
                             <li class="active">
                                 <i class="fa fa-table"></i> Tables
@@ -119,6 +119,20 @@
                                     ?>
                                 </tbody>
                             </table>
+                            <h2>Ajouter une nouvelle table</h2>
+                            <div class="col-lg-3">
+                                <?php echo "<form action='add_table.php?db=" . $db . " method='POST' accept-charset='UTF-8' enctype='multipart/form-data' role='add'>"; ?>
+                                    <div class="form-group">
+                                        <label>Nouvelle table :</label>
+                                        <input type="text" name="tab" class="form-control" placeholder="Nom de la table">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Nombre de colonne :</label>
+                                        <input type="text" name="col" class="form-control" placeholder="Entrez la valeur">
+                                    </div>
+                                    <button type="submit" class="btn btn-default">Submit Button</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
