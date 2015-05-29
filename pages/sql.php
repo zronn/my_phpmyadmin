@@ -39,97 +39,105 @@ mysqli_select_db($connect, $db);
         <script type="text/javascript" src="../js/jquery.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
-
+                var $_GET = {};
+                document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
+                    function decode(s) { 
+                        return decodeURIComponent(s.split("+").join(" "));
+                    }
+                    $_GET[decode(arguments[1])] = decode(arguments[2]);
+                });
+                var db = $_GET["db"];
                 $("#submit").click(function(){
                     var query = $("#query").val();
-                    //console.log($("#query").val());
                     $.ajax({
-                            url: "exec_query.php",
-                            type: "POST", 
-                            data: {query : query},
-                            dataType : "json", 
-                            success: function(data) { 
-                                alert(data); 
-                            },
-                            error: function(data) {
-                                alert(data);
-                            }
+                        url: "exec_query.php",
+                        type: "POST", 
+                        data: {query : query , db : db},
+                        dataType : 'json',
+                        success: function(data) { 
+                            $("#resSql").html("<i>"+data.result+"</i>");
+                             $("#resSql").css("color","red");
+                       },
+                        error: function(data) {
+                            $("#resSql").html("</i>"+data.result+"</i>"); 
+                        }
                     });
                 });
 
             });
-        </script>
-    </head>
+</script>
+</head>
 
-    <body>
+<body>
 
-        <div id="wrapper">
+    <div id="wrapper">
 
-            <!-- Navigation -->
-            <?php
-            include("navig.php");
-            ?>
+        <!-- Navigation -->
+        <?php
+        include("navig.php");
+        ?>
 
-            <div id="page-wrapper">
-                <div class="container-fluid">
-                    <!-- Page Heading -->
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1 class="page-header">
-                                SQL <small>Code</small>
-                            </h1>
-                            <ol class="breadcrumb">
-                                <li class="active">
-                                    Votre requette seras executer sur la base de donnees : <?php echo strtoupper($db); ?>
-                                </li>
-                            </ol>
-                        </div>
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            SQL <small>Code</small>
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                Votre requette seras executer sur la base de donnees : <?php echo strtoupper($db); ?>
+                            </li>
+                        </ol>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-1">
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="fa fa-keyboard-o fa-fw"></i> Saisir votre requette sql dans la fenetre ci-dessous :</h3>
-                                </div>
-                                <div class="panel-body">
-                                    <form role="form">
-                                        <div class="form-group">
-                                            <label class="pull-right" for="comment"><i class="fa fa-exclamation-triangle"></i> Respecter la Syntaxe Sql.</label>
-                                            <br>
-                                            <textarea class="form-control" rows="7" id="query"></textarea>
-                                        </div>
-
+                </div>
+                <div class="row"><p align="center" id="resSql"></p></div>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-keyboard-o fa-fw"></i> Saisir votre requette sql dans la fenetre ci-dessous :</h3>
+                            </div>
+                            <div class="panel-body">
+                                <form role="form">
+                                    <div class="form-group">
+                                        <label class="pull-right" for="comment"><i class="fa fa-exclamation-triangle"></i> Respecter la Syntaxe Sql.</label>
                                         <br>
-                                    </form>
-                                    <div class="text-center">
-                                        <button class="btn btn-success" id="submit">Executer</button>
+                                        <textarea class="form-control" rows="7" id="query"></textarea>
                                     </div>
 
+                                    <br>
+                                </form>
+                                <div class="text-center">
+                                    <button class="btn btn-success" id="submit">Executer</button>
                                 </div>
+
                             </div>
                         </div>
-                        <div class="col-lg-1">
-                        </div>
+                    </div>
+                    <div class="col-lg-1">
                     </div>
                 </div>
             </div>
-            <!-- /#page-wrapper -->
-
         </div>
-        <!-- /#wrapper -->
+        <!-- /#page-wrapper -->
 
-        <!-- jQuery -->
-        <script src="../js/jquery.js"></script>
+    </div>
+    <!-- /#wrapper -->
 
-        <!-- Bootstrap Core JavaScript -->
-        <script src="../js/bootstrap.min.js"></script>
+    <!-- jQuery -->
+    <script src="../js/jquery.js"></script>
 
-        <!-- Morris Charts JavaScript -->
-        <script src="../js/plugins/morris/raphael.min.js"></script>
-        <script src="../js/plugins/morris/morris.min.js"></script>
-        <script src="../js/plugins/morris/morris-data.js"></script>
-    </body>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../js/bootstrap.min.js"></script>
 
-    </html>
+    <!-- Morris Charts JavaScript -->
+    <script src="../js/plugins/morris/raphael.min.js"></script>
+    <script src="../js/plugins/morris/morris.min.js"></script>
+    <script src="../js/plugins/morris/morris-data.js"></script>
+</body>
+
+</html>

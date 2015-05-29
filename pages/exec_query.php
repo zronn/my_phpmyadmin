@@ -1,22 +1,26 @@
 <?php
+session_start();
 require_once '../check_session/connect_mysql.php';
 require_once '../check_session/needAuth.php';
-
-$res = FALSE;
+if ((isset($_POST['db'])) && (!empty($_POST['db'])))
+	mysqli_select_db($connect, $_POST['db']);
 if ((isset($_POST['query'])) && (!empty($_POST['query'])))
 {
+	$query;
 	$sql = $_POST['query'];
-	if (mysqli_query($connect, $sql) === TRUE)
-		$res = TRUE;
+	$msc = microtime(true);
+	$query = mysqli_query($connect, $sql);
+	$msc = microtime(true)-$msc;
+	$time = ($msc * 1000) . ' ms';
+	if (!$query)
+	{
+		$error = mysqli_error($connect);
+	}
 	else
-		$res = FALSE;
-
-	if ($res === TRUE)
-		$reponse = array("ok" => "ok");
-	else
-		$reponse = array("ko" => "ko");
+		$reponse = array('result' => "Requette Sql Ok -> Traitement en $time");
 
 	echo json_encode($reponse);
+
 }	
 
 ?>
