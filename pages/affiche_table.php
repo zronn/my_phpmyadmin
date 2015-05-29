@@ -65,7 +65,7 @@
                         </h1>
                         <ol class="breadcrumb">
                             <li>
-                                <i class="fa fa-dashboard"></i>  <a href="index.html">Accueil</a>
+                                <i class="fa fa-dashboard"></i>  <a href="index.php">Accueil</a>
                             </li>
                             <li class="active">
                                 <i class="fa fa-table"></i> Tables
@@ -82,7 +82,13 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2>Bordered Table</h2>
+                        <h2>Tables de la base de données <?php echo $db;?></h2>
+                        <?php
+                            if (isset($_GET['error']))
+                            {
+                                echo "<span style='font-style:italic; color:red;'> MySQL Error : " . $_GET['error'] . "</span><br><br>";
+                            }
+                        ?>
                         <div class="table-responsive">
                             <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
@@ -106,13 +112,27 @@
                                           {
                                             echo "<tr>";
                                             echo "<td><a href='affiche_contenu.php?db=" . $db . "&tb=" . $data[0] . "'>" . $data[0] ."</a></td>";
-                                            echo "<td><a href='affiche_contenu.php?db=" . $db . "&tb=" . $data[0] . "'>Afficher</a> | Modifier | Supprimer</td>";
+                                            echo "<td><a href='affiche_contenu.php?db=" . $db . "&tb=" . $data[0] . "'><i class='fa fa-fw fa-file'></i>Afficher</a><a href='affiche_contenu.php?db=" . $db . "&tb=" . $data[0] . "'><i class='fa fa-fw fa-pencil'></i>Insérer</a><a href='clean_table.php?db=" . $db . "&tb=" . $data[0] . "'><i class='fa fa-fw fa-trash-o'></i>Vider</a><a href='delete_table.php?db=" . $db . "&tb=" . $data[0] . "'><i class='fa fa-fw fa-times-circle'></i>Supprimer</a></td>";
                                             echo "</tr>";
                                           }  
                                         }
                                     ?>
                                 </tbody>
                             </table>
+                            <h2>Ajouter une nouvelle table</h2>
+                            <div class="col-lg-3">
+                                <?php echo "<form action='add_table.php?db=" . $db . " method='POST' accept-charset='UTF-8' enctype='multipart/form-data' role='add'>"; ?>
+                                    <div class="form-group">
+                                        <label>Nouvelle table :</label>
+                                        <input type="text" name="tab" class="form-control" placeholder="Nom de la table">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Nombre de colonne :</label>
+                                        <input type="text" name="col" class="form-control" placeholder="Entrez la valeur">
+                                    </div>
+                                    <button type="submit" class="btn btn-default">Submit Button</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -144,7 +164,6 @@
             $('#example').dataTable();
         } );
     </script>
-
 </body>
 
 </html>

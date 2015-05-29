@@ -68,7 +68,13 @@
                                 <i class="fa fa-dashboard"></i>  <a href="index.php"> Accueil</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Tables
+                                <i class="fa fa-table"></i>
+                                <?php
+                                    echo "<a href='affiche_table.php?db=" . $_GET['db'] . "'> Table</a>";
+                                ?>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-file"></i> Affichage
                             </li>
                             <?php echo "<a href=\"sql.php?db=$db\">"?>
                             <button class="btn btn-info btn-xs pull-right">
@@ -108,6 +114,7 @@
                                             {
                                                 echo '<th>'.$tab_title[$j].'</th>';
                                             }
+                                            echo "<th style='text-align:center;'>Actions</th>";
                                         ?>
                                     </tr>
                                 </thead>
@@ -119,6 +126,7 @@
                                         {
                                             echo '<td>'.$row[$tab_title[$j]].'</td>';
                                         }
+                                            echo "<td><a href='affiche_contenu.php?db=" . $db . "&tb=" . $data[0] . "'><i class='fa fa-fw fa-pencil'></i>Insérer</a><a href='clean_table.php?db=" . $db . "&tb=" . $data[0] . "'><i class='fa fa-fw fa-trash-o'></i>Vider</a><a href='delete_table.php?db=" . $db . "&tb=" . $data[0] . "'><i class='fa fa-fw fa-times-circle'></i>Supprimer</a></td>";
                                     }
                                     mysqli_free_result($result);
                                 ?>
