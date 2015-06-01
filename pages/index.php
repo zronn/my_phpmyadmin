@@ -155,40 +155,61 @@ require_once '../check_session/needAuth.php';
                                     <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Ajouter une Nouvelle Base de donnees :</h3>
                                 </div>
                                 <div class="panel-body">
-                                    <form role="form">
-                                        <div class=" col-lg-10 form-group">
-                                            <br>
-                                            <label class="pull-right" for="comment"><i class="fa fa-exclamation-triangle"></i> Uniquement Alphanumerique et "_" ou "-"</label>
-                                            <br>
-                                            <br>
-                                            <input class="form-control" type="text" id="database" />
-                                        </div>
+                                    <div class=" col-lg-10 form-group">
+                                        <br>
+                                        <label class="pull-right" for="comment"><i class="fa fa-exclamation-triangle"></i> Uniquement Alphanumerique et "_" ou "-"</label>
+                                        <input class="form-control" type="text" id="database" />
                                     </div>
-                                    <div class="text-center">
-                                        <button class="btn btn-success btn-md" id="submit">Ajouter</button>
-                                    </div>
-                                    <br>
-                                </form>
-                            </div>
+                                </div>
+                                <div class="text-center">
+                                    <button class="btn btn-success btn-md" id="submit">Ajouter</button>
+                                </div>
+                                <br>
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="fa fa-trash-o fa-fw"></i> Supprimer une Base de donnees :</h3>
+                                </div>
+                                                                <div class="panel-body">
+
+                                <?php
+                                if (isset($connect))
+                                {
+                                  $query = "show databases";
+                                  $result = mysqli_query($connect, $query);
+                                  if (!$result)
+                                  {
+                                    echo "ERROR";
+                                }
+                                while ($data = mysqli_fetch_row($result))
+                                {
+                                    echo "<ul class='pagination'>";
+                                    echo "<li>";
+                                    echo "<a href='delete_db.php?db=" . $data[0] . "'><i class='fa fa-fw fa-times-circle'></i> " . $data[0] ."</a>";
+                                    echo "</li>";
+                                    echo "</ul>";
+                                }  
+                            }
+                            ?>                               
+                            </div> 
                         </div>
                     </div>
                 </div>
-                <!-- /.row -->
-
             </div>
-            <!-- /.container-fluid -->
+            <!-- /.row -->
 
         </div>
-        <!-- /#page-wrapper -->
+        <!-- /.container-fluid -->
 
     </div>
-    <!-- /#wrapper -->
+    <!-- /#page-wrapper -->
 
-    <!-- jQuery -->
-    <!-- Morris Charts JavaScript -->
-    <script src="../js/plugins/morris/raphael.min.js"></script>
-    <script src="../js/plugins/morris/morris.min.js"></script>
-    <script src="../js/plugins/morris/morris-data.js"></script>
+</div>
+<!-- /#wrapper -->
+
+<!-- jQuery -->
+<!-- Morris Charts JavaScript -->
+<script src="../js/plugins/morris/raphael.min.js"></script>
+<script src="../js/plugins/morris/morris.min.js"></script>
+<script src="../js/plugins/morris/morris-data.js"></script>
 
 </body>
 
