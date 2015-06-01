@@ -89,6 +89,21 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h2>Affichage de la table <?php echo $_GET['tb']; ?></h2>
+                        <?php
+                            if (isset($_GET['success']))
+                                echo "<ol class='breadcrumb' style='background: rgba(112, 255, 141, 1);'>
+                                        <li>
+                                            <i class='fa fa-check'></i> " . $_GET['success'] ."
+                                        </li>
+                                    </ol>";
+                            else if (isset($_GET['error']))
+                                echo "<ol class='breadcrumb' style='background: rgba(255, 112, 112, 1);'>
+                                        <li>
+                                            <i class='fa fa-remove'></i> MySQL error : " . $_GET['error'] ."
+                                        </li>
+                                    </ol>";
+
+                        ?>
                         <div class="table-responsive">
                             <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <?php
@@ -126,7 +141,15 @@
                                         {
                                             echo '<td>'.$row[$tab_title[$j]].'</td>';
                                         }
-                                            echo "<td><a href='affiche_contenu.php?db=" . $db . "&tb=" . $data[0] . "'><i class='fa fa-fw fa-pencil'></i>Insérer</a><a href='clean_table.php?db=" . $db . "&tb=" . $data[0] . "'><i class='fa fa-fw fa-trash-o'></i>Vider</a><a href='delete_table.php?db=" . $db . "&tb=" . $data[0] . "'><i class='fa fa-fw fa-times-circle'></i>Supprimer</a></td>";
+                                            echo "<td><a href='affiche_contenu.php?db=" . $db . "&tb=" . $data[0] . "'><i class='fa fa-fw fa-pencil'></i>Modifier</a><a href='delete_contenu.php?db=" . $db . "&tb=" . $tb . "&query=DELETE FROM " . $tb . " WHERE ";
+                                            for ($j = 1; isset($tab_title[$j]); $j+=2)
+                                                {
+                                                    if ($j != 1)
+                                                        echo " AND " . $tab_title[$j] . " = " . "\"" . $row[$tab_title[$j]] . "\"";
+                                                    else 
+                                                        echo  $tab_title[$j] . "=" . "\"" . $row[$tab_title[$j]] . "\"";
+                                                }
+                                            echo "'><i class='fa fa-fw fa-times-circle'></i>Supprimer</a></td>";
                                     }
                                     mysqli_free_result($result);
                                 ?>
