@@ -54,7 +54,7 @@
 	}
 	else
 	{
-		header("Location: affiche_table.php?db=" . $_GET['db'] . "&success=La table " . $tb . " a été créee avec succés!");
+		header("Location: affiche_table.php?db=" . $_GET['db'] . "&success=La table " . $tb . " 	a été créee avec succés!");
 		exit();
 	}
 ?>
