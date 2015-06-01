@@ -20,7 +20,11 @@ if ((isset($_POST['query'])) && (!empty($_POST['query'])))
 		if (!$query)
 		{
 			$error = mysqli_error($connect);
-			$reponse = array('result' => "SQL error : $error");
+			$reponse = array('result' => "<ol class='breadcrumb' style='background: rgba(255, 112, 112, 1);'>
+                                        <li>
+                                            <i class='fa fa-remove'></i> MySQL error : $error
+                                        </li>
+                                    </ol>");
 		}
 		else
 			$reponse = array('result' => "Requette Sql Ok -> Traitement en $time");
@@ -47,7 +51,11 @@ if ((isset($_POST['query'])) && (!empty($_POST['query'])))
 				array_push($tab, $res);
 			}
 
-			$reponse = array('result' => "Requette Sql Ok -> Traitement en $time", 'tab' => $tab);
+			$reponse = array('result' => "<ol class='breadcrumb' style='background: rgba(112, 255, 141, 1);'>
+                                        <li>
+                                            <i class='fa fa-check'></i>Traitement de la requette en :  $time
+                                        </li>
+                                    </ol>", 'tab' => $tab);
 		}
 	}
 
