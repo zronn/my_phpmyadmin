@@ -37,7 +37,7 @@
                 <a href="export.php"><i class="fa fa-fw fa-send"></i> Exporter</a>
             </li>
             <li>
-                <a href="import.php"><i class="fa fa-fw fa-shield"></i> Importer</a>
+                <a href="import.php"><i class="fa fa-fw fa-file-code-o"></i> Importer</a>
             </li>
             <li>
                 <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Databases <i class="fa fa-fw fa-caret-down"></i></a>

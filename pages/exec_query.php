@@ -7,7 +7,7 @@ if ((isset($_POST['db'])) && (!empty($_POST['db'])))
 if ((isset($_POST['query'])) && (!empty($_POST['query'])))
 {
 
-	$ex = explode(" ", $query);
+	$ex = explode(" ", $_POST['query']);
 
 	if (strtolower($ex[0]) != "select")
 	{
@@ -39,17 +39,23 @@ if ((isset($_POST['query'])) && (!empty($_POST['query'])))
 			$reponse = array('result' => "SQL error : $error");
 		}
 		else
-			$reponse = array('result' => "Requette Sql Ok -> Traitement en $time");
+		{
+			$tab = array();
+			$res = mysqli_fetch_assoc($query);
 
+			foreach($res as $key => $value)
+			{
+				array_push($tab, $value);
+			}
+				echo '<pre>';
+					print_r($tab);
+				echo '</pre>';
+
+			$reponse = array('result' => "Requette Sql Ok -> Traitement en $time", 'res' => $res);
+		}
 	}
 
-
-
-
-
-	
 	echo json_encode($reponse);
-
 }	
 
 ?>

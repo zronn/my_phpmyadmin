@@ -3,6 +3,12 @@
 over-ride "Weak" message, show font in dark grey
 */
 
+.file-input-wrapper
+{
+    background-color: #19C3F7 !important;
+}
+
+
 .progress-bar {
     color: #333;
 } 

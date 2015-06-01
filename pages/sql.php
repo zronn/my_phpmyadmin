@@ -46,6 +46,7 @@ mysqli_select_db($connect, $db);
                     }
                     $_GET[decode(arguments[1])] = decode(arguments[2]);
                 });
+                var i = 0;
                 var db = $_GET["db"];
                 $("#submit").click(function(){
                     var query = $("#query").val();
@@ -56,8 +57,18 @@ mysqli_select_db($connect, $db);
                         dataType : 'json',
                         success: function(data) { 
                             $("#resSql").html("<i>"+data.result+"</i>");
-                             $("#resSql").css("color","red");
-                       },
+                            $("#resSql").css("color","red");
+                            if (typeof data.res != 'undefined')
+                            {
+                                console.log(data.res.rtr);                              
+/*                                while (typeof data.res.i != 'undefined')
+                                {
+                                    console.log(data.res.i);
+                                    i++;
+                                }
+*/                           
+                             }
+                        },
                         error: function(data) {
                             $("#resSql").html("</i>"+data.result+"</i>"); 
                         }
@@ -121,23 +132,32 @@ mysqli_select_db($connect, $db);
                     <div class="col-lg-1">
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- /#page-wrapper -->
+                <div class="row">
+                   <div class="col-lg-1">
+                   </div>
+                   <div id="datares" class="col-lg-10">
 
-    </div>
-    <!-- /#wrapper -->
+                   </div>
+                   <div class="col-lg-1">
+                   </div>    
+               </div>
+           </div>
+       </div>
+       <!-- /#page-wrapper -->
 
-    <!-- jQuery -->
-    <script src="../js/jquery.js"></script>
+   </div>
+   <!-- /#wrapper -->
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../js/bootstrap.min.js"></script>
+   <!-- jQuery -->
+   <script src="../js/jquery.js"></script>
 
-    <!-- Morris Charts JavaScript -->
-    <script src="../js/plugins/morris/raphael.min.js"></script>
-    <script src="../js/plugins/morris/morris.min.js"></script>
-    <script src="../js/plugins/morris/morris-data.js"></script>
+   <!-- Bootstrap Core JavaScript -->
+   <script src="../js/bootstrap.min.js"></script>
+
+   <!-- Morris Charts JavaScript -->
+   <script src="../js/plugins/morris/raphael.min.js"></script>
+   <script src="../js/plugins/morris/morris.min.js"></script>
+   <script src="../js/plugins/morris/morris-data.js"></script>
 </body>
 
 </html>
