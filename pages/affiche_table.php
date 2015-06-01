@@ -84,10 +84,18 @@
                     <div class="col-lg-12">
                         <h2>Tables de la base de données <?php echo $db;?></h2>
                         <?php
-                            if (isset($_GET['error']))
-                            {
-                                echo "<span style='font-style:italic; color:red;'> MySQL Error : " . $_GET['error'] . "</span><br><br>";
-                            }
+                            if (isset($_GET['success']))
+                                echo "<ol class='breadcrumb' style='background: rgba(112, 255, 141, 1);'>
+                                        <li>
+                                            <i class='fa fa-check'></i> " . $_GET['success'] . "
+                                        </li>
+                                    </ol>";
+                            else if (isset($_GET['error']))
+                                echo "<ol class='breadcrumb' style='background: rgba(255, 112, 112, 1);'>
+                                        <li>
+                                            <i class='fa fa-remove'></i> MySQL error : " . $_GET['error'] ."
+                                        </li>
+                                    </ol>";
                         ?>
                         <div class="table-responsive">
                             <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -121,7 +129,7 @@
                             </table>
                             <h2>Ajouter une nouvelle table</h2>
                             <div class="col-lg-3">
-                                <?php echo "<form action='add_table.php?db=" . $db . " method='POST' accept-charset='UTF-8' enctype='multipart/form-data' role='add'>"; ?>
+                                <?php echo "<form action='add_table.php?db=" . $db . "' method='POST' accept-charset='UTF-8' enctype='multipart/form-data' role='add'>"; ?>
                                     <div class="form-group">
                                         <label>Nouvelle table :</label>
                                         <input type="text" name="tab" class="form-control" placeholder="Nom de la table">
