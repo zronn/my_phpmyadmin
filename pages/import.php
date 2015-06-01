@@ -2,6 +2,9 @@
 session_start();
 require_once '../check_session/connect_mysql.php';
 require_once '../check_session/needAuth.php';
+if ((isset($_GET['db'])) && (!empty($_GET['db']))) {
+    $_SESSION['db'] = $_GET['db'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,6 +98,28 @@ require_once '../check_session/needAuth.php';
                                     <div class="col-lg-3">
                                     </div>
                                 </div>
+                                                                 <div class="panel-body">
+
+                                <?php
+                                if (isset($connect))
+                                {
+                                  $query = "show databases";
+                                  $result = mysqli_query($connect, $query);
+                                  if (!$result)
+                                  {
+                                    echo "ERROR";
+                                }
+                                while ($data = mysqli_fetch_row($result))
+                                {
+                                    echo "<ul class='pagination'>";
+                                    echo "<li>";
+                                    echo "<a href='import.php?db=" . $data[0] . "'><i class='fa fa-fw fa-times-circle'></i> " . $data[0] ."</a>";
+                                    echo "</li>";
+                                    echo "</ul>";
+                                }  
+                            }
+                            ?>                               
+                            </div>
                             </div>
                         </div>
                         <div class="col-lg-1">
