@@ -33,6 +33,7 @@ if ((isset($_POST['query'])) && (!empty($_POST['query'])))
 		$query = mysqli_query($connect, $sql);
 		$msc = microtime(true)-$msc;
 		$time = ($msc * 1000) . ' ms';
+		
 		if (!$query)
 		{
 			$error = mysqli_error($connect);
@@ -41,17 +42,12 @@ if ((isset($_POST['query'])) && (!empty($_POST['query'])))
 		else
 		{
 			$tab = array();
-			$res = mysqli_fetch_assoc($query);
-
-			foreach($res as $key => $value)
+			while($res = mysqli_fetch_assoc($query))
 			{
-				array_push($tab, $value);
+				array_push($tab, $res);
 			}
-				echo '<pre>';
-					print_r($tab);
-				echo '</pre>';
 
-			$reponse = array('result' => "Requette Sql Ok -> Traitement en $time", 'res' => $res);
+			$reponse = array('result' => "Requette Sql Ok -> Traitement en $time", 'tab' => $tab);
 		}
 	}
 

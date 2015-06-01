@@ -155,7 +155,6 @@ require_once '../check_session/needAuth.php';
                                     <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Ajouter une Nouvelle Base de donnees :</h3>
                                 </div>
                                 <div class="panel-body">
-                                    <form role="form">
                                         <div class=" col-lg-10 form-group">
                                             <br>
                                             <label class="pull-right" for="comment"><i class="fa fa-exclamation-triangle"></i> Uniquement Alphanumerique et "_" ou "-"</label>
@@ -168,7 +167,7 @@ require_once '../check_session/needAuth.php';
                                         <button class="btn btn-success btn-md" id="submit">Ajouter</button>
                                     </div>
                                     <br>
-                                </form>
+                                
                             </div>
                         </div>
                     </div>

@@ -39,6 +39,15 @@ mysqli_select_db($connect, $db);
         <script type="text/javascript" src="../js/jquery.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
+
+                function cles(objects)
+                {
+                    for(var key in objects) {
+                        var value = objects[key];
+                    }
+                    return value;
+                }
+
                 var $_GET = {};
                 document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
                     function decode(s) { 
@@ -58,24 +67,34 @@ mysqli_select_db($connect, $db);
                         success: function(data) { 
                             $("#resSql").html("<i>"+data.result+"</i>");
                             $("#resSql").css("color","red");
-                            if (typeof data.res != 'undefined')
+                            if (typeof data.tab != 'undefined')
                             {
-                                console.log(data.res.rtr);                              
-/*                                while (typeof data.res.i != 'undefined')
-                                {
-                                    console.log(data.res.i);
-                                    i++;
+                                var res = Object.keys(data.tab[0]), th = "", td = "";
+                                for (var key in res){
+                                    //console.log(res[key]);
+                                     th += "<th>"+res[key]+"</th>"; 
                                 }
-*/                           
-                             }
+                                $("#trth").html(th);
+
+                                for (var i in data.tab) {
+                                    td += "<tr>";
+                                    for (var k in data.tab[i]) {
+                                        td += "<td>" + data.tab[i][k] + "</td>";
+                                    }
+                                    td += "</tr>";
+                                }
+
+                                $("#tbody").html(td);
+
+                            }
                         },
                         error: function(data) {
                             $("#resSql").html("</i>"+data.result+"</i>"); 
                         }
                     });
-                });
+});
 
-            });
+});
 </script>
 </head>
 
@@ -133,13 +152,21 @@ mysqli_select_db($connect, $db);
                     </div>
                 </div>
                 <div class="row">
-                   <div class="col-lg-1">
-                   </div>
-                   <div id="datares" class="col-lg-10">
 
+                   <div id="datares" class="col-lg-12">
+                   <h3>RESULTAT :</h3>
+                   <table id="table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                       <thead>
+                           <tr id="trth">
+                           
+                           </tr>
+                       </thead>
+                       <tbody id="tbody">
+                           
+                       </tbody>
+                   </table>
                    </div>
-                   <div class="col-lg-1">
-                   </div>    
+                       
                </div>
            </div>
        </div>
