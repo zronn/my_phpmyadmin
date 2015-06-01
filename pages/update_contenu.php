@@ -74,7 +74,7 @@
                                 ?>
                             </li>
                             <li class="active">
-                                <i class="fa fa-file"></i> Affichage
+                                <i class="fa fa-file"></i> Modification de la ligne choisie
                             </li>
                             <?php echo "<a href=\"sql.php?db=$db\">"?>
                             <button class="btn btn-info btn-xs pull-right">
@@ -88,7 +88,7 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2>Affichage de la table <?php echo $_GET['tb']; ?></h2>
+                        <h2>Modification d'une ligne dans <?php echo $_GET['tb']; ?></h2>
                         <?php
                             if (isset($_GET['success']))
                                 echo "<ol class='breadcrumb' style='background: rgba(112, 255, 141, 1);'>
@@ -105,7 +105,7 @@
 
                         ?>
                         <div class="table-responsive">
-                            <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <table class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <?php
                                     $tb = $_GET['tb'];
                                     $query = "SELECT * FROM $tb";
@@ -123,46 +123,31 @@
                                         $tab_title = array_keys(mysqli_fetch_array(mysqli_query($connect, $query)));
                                 ?>
                                 <thead>
-                                    <tr  style="text-align:center;">
+                                    <tr style="text-align:center;">
                                         <?php 
                                             for ($j = 1; isset($tab_title[$j]); $j+=2)
                                             {
                                                 echo '<th>'.$tab_title[$j].'</th>';
                                             }
-                                            echo "<th style='text-align:center;'>Actions</th>";
                                         ?>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php 
-                                    while ($row = mysqli_fetch_array($result)) {
-                                        echo '<tr>';
-                                        for ($j = 1; isset($tab_title[$j]); $j+=2)
-                                        {
-                                            echo '<td>'.$row[$tab_title[$j]].'</td>';
-                                        }
-                                            echo "<td><a href='update_contenu.php?db=" . $db . "&tb=" . $_GET['tb'] . "&requete=WHERE ";
+                                    <?php 
+                                        echo "<form action='update_contenu_request.php?db=" . $db . "&tb=" . $tb . "' method='POST' accept-charset='UTF-8' enctype='multipart/form-data' role='add'>";
+                                    ?>
+                                    <tr>
+                                        <?php
                                             for ($j = 1; isset($tab_title[$j]); $j+=2)
                                                 {
-                                                    if ($j != 1)
-                                                        echo " AND " . $tab_title[$j] . " = " . "\"" . $row[$tab_title[$j]] . "\"";
-                                                    else 
-                                                        echo  $tab_title[$j] . "=" . "\"" . $row[$tab_title[$j]] . "\"";
+                                                    echo "<td><input type='text' name='value" . $j . "'></td>";
                                                 }
-                                            echo "'><i class='fa fa-fw fa-pencil'></i>Modifier</a><a href='delete_contenu.php?db=" . $db . "&tb=" . $tb . "&query=DELETE FROM " . $tb . " WHERE ";
-                                            for ($j = 1; isset($tab_title[$j]); $j+=2)
-                                                {
-                                                    if ($j != 1)
-                                                        echo " AND " . $tab_title[$j] . " = " . "\"" . $row[$tab_title[$j]] . "\"";
-                                                    else 
-                                                        echo  $tab_title[$j] . "=" . "\"" . $row[$tab_title[$j]] . "\"";
-                                                }
-                                            echo "'><i class='fa fa-fw fa-times-circle'></i>Supprimer</a></td>";
-                                    }
-                                    mysqli_free_result($result);
-                                ?>
+                                        ?>
+                                    </tr>
                                 </tbody>
                             </table>
+                            <button type='submit' class='btn btn-default'>Envoyer</button><br><br>
+                            </form>
                             <?php
                                 }
                                 else

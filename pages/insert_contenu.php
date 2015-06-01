@@ -7,6 +7,10 @@
     $db = $_GET['db'];
     mysqli_select_db($connect, $_GET['db']);
   }
+  if (isset($_GET['tb']))
+  {
+    $tb = $_GET['tb'];
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,14 +65,22 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Tables
+                            <?php
+                                echo "Insérer du contenu dans la table " . $tb;
+                            ?>
                         </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="index.php">Accueil</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Tables
+                                <i class="fa fa-table"></i>
+                                <?php
+                                    echo "<a href='affiche_table.php?db=" . $db . "'> Table</a>";
+                                ?>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-table"></i> Nouvelle ligne
                             </li>
                             <?php echo "<a href=\"sql.php?db=$db\">"?>
                             <button class="btn btn-info btn-xs pull-right">
@@ -82,65 +94,34 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2>Tables de la base de données <?php echo $db;?></h2>
+                        <h2>Ajoutez les valeurs souhaitées :</h2>
                         <?php
-                            if (isset($_GET['success']))
-                                echo "<ol class='breadcrumb' style='background: rgba(112, 255, 141, 1);'>
-                                        <li>
-                                            <i class='fa fa-check'></i> " . $_GET['success'] . "
-                                        </li>
-                                    </ol>";
-                            else if (isset($_GET['error']))
-                                echo "<ol class='breadcrumb' style='background: rgba(255, 112, 112, 1);'>
-                                        <li>
-                                            <i class='fa fa-remove'></i> MySQL error : " . $_GET['error'] ."
-                                        </li>
-                                    </ol>";
+                            if (isset($_GET['error']))
+                            {
+                                echo "<span style='font-style:italic; color:red;'> MySQL Error : " . $_GET['error'] . "</span><br><br>";
+                            }
                         ?>
                         <div class="table-responsive">
                             <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Tables</th>
-                                        <th>Actions</th>
+                                        <th>Nom</th>
+                                        <th>Type</th>
+                                        <th>Taille/Valeurs</th>
+                                        <th>NOT NULL</th>
+                                        <th>Index</th>
+                                        <th>A_I</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                        $db = $_GET['db'];
-                                        if (!empty($connect))
-                                        {
-                                          $query = "show tables";
-                                          $result = mysqli_query($connect, $query);
-                                          if (!$result)
-                                          {
-                                            echo "ERROR";
-                                          }
-                                          while ($data = mysqli_fetch_array($result))
-                                          {
-                                            echo "<tr>";
-                                            echo "<td><a href='affiche_contenu.php?db=" . $db . "&tb=" . $data[0] . "'>" . $data[0] ."</a></td>";
-                                            echo "<td><a href='affiche_contenu.php?db=" . $db . "&tb=" . $data[0] . "'><i class='fa fa-fw fa-file'></i>Afficher</a><a href='insert_contenu.php?db=" . $db . "&tb=" . $data[0] . "'><i class='fa fa-fw fa-pencil'></i>Insérer</a><a href='clean_table.php?db=" . $db . "&tb=" . $data[0] . "'><i class='fa fa-fw fa-trash-o'></i>Vider</a><a href='delete_table.php?db=" . $db . "&tb=" . $data[0] . "'><i class='fa fa-fw fa-times-circle'></i>Supprimer</a></td>";
-                                            echo "</tr>";
-                                          }  
-                                        }
+                                        echo "<form action='insert_contenu_request.php?db=" . $db . "&tb=" . $tb . "' method='POST' accept-charset='UTF-8' enctype='multipart/form-data' role='add'>";
                                     ?>
+                                    
                                 </tbody>
                             </table>
-                            <h2>Ajouter une nouvelle table</h2>
-                            <div class="col-lg-3">
-                                <?php echo "<form action='add_table.php?db=" . $db . "' method='POST' accept-charset='UTF-8' enctype='multipart/form-data' role='add'>"; ?>
-                                    <div class="form-group">
-                                        <label>Nouvelle table :</label>
-                                        <input type="text" name="tab" class="form-control" placeholder="Nom de la table">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Nombre de colonne :</label>
-                                        <input type="text" name="col" class="form-control" placeholder="Entrez la valeur">
-                                    </div>
-                                    <button type="submit" class="btn btn-default">Submit Button</button>
-                                </form>
-                            </div>
+                            <button type='submit' class='btn btn-default'>Envoyer</button><br><br>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -164,14 +145,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-
-    <!-- Affichage tableau + scroling + search -->
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#example').dataTable();
-        } );
-    </script>
 </body>
 
 </html>
