@@ -134,7 +134,7 @@
                                 </thead>
                                 <tbody>
                                     <?php 
-                                        echo "<form action='update_contenu_request.php?db=" . $db . "&tb=" . $tb . "' method='POST' accept-charset='UTF-8' enctype='multipart/form-data' role='add'>";
+                                        echo "<form action='update_contenu_request.php?db=" . $db . "&tb=" . $tb . "&query=" . $_GET['requete'] . "' method='POST' accept-charset='UTF-8' enctype='multipart/form-data' role='add'>";
                                     ?>
                                     <tr>
                                         <?php
